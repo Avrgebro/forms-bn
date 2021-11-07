@@ -25,8 +25,8 @@ export default {
   },
   data() {
     return {
-      title: 'SG - La Garita',
-      logo: Drop
+      title: 'SG - Procesos',
+      logo: null
     }
   }
 }

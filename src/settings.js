@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'SG - La Garita',
+  title: 'SG - Procesos',
 
   /**
    * @type {boolean} true | false
