@@ -1,0 +1,216 @@
+import axios from 'axios'
+import { getToken, setToken, removeToken } from '@/utils/auth'
+import { resetRouter } from '@/router'
+
+import forms from '../data/forms'
+import censos from '../data/censos'
+import familias from '../data/familias'
+
+//const ruta = state.server
+
+export default {
+  Login({ commit, state }, user) {
+    let ruta = state.server;
+    let res = ruta.concat('api/usuario/login');
+    // return new Promise((resolve, reject) => {
+    //   axios.post(res, user)
+    //     .then(response => {
+    //       if (response.data.code === 200) {
+    //         commit('Login', response.data)
+    //         setToken(response.data.idRol)
+    //       }
+    //       resolve(response);
+    //     })
+    //     .catch(e => {
+    //       console.log(e);
+    //       reject(e);
+    //     });
+    // });
+
+    user = {
+        "usuarioId": 1,
+        "personaId": 0,
+        "nombres": "Gonchi Campos",
+        "apePaterno": null,
+        "apeMaterno": null,
+        "idRol": 1,
+        "email": null,
+        "fecNacimiento": null,
+        "password": "Server1",
+        "activo": false,
+        "usuario": "admin",
+        "code": 200
+    }
+
+    commit('Login', user),
+    setToken(user.idRol)
+  },
+
+  Logout({commit,state}) {
+    return new Promise((resolve,reject) => {
+      removeToken()
+      resetRouter()
+      resolve()
+    })
+  },
+
+  GetFormularios({commit,state}) {
+    let ruta = state.server
+    let res = ruta.concat('api/formulario/get')
+    // return new Promise((resolve, reject) => {
+    //   axios.get(res)
+    //   .then(response => {
+    //     commit('getFormularios',response.data)
+    //     resolve(response)
+    //   })
+    //   .catch(e => {
+    //     console.log(e)
+    //     reject(e)
+    //   })
+    // })
+
+    commit('getFormularios',forms.forms)
+  },
+
+  StoreFormulario({commit,state}, formulario) {
+    let ruta = state.server
+    let res = ruta.concat('api/formulario/crear')
+    // return new Promise((resolve,reject) => {
+    //   axios.post(res, formulario)
+    //   .then(response => {
+    //     commit('storeFormulario',response.data)
+    //     resolve(response)
+    //   })
+    //   .catch(e => {
+    //     console.log(e)
+    //     reject(e)
+    //   })
+    // })
+    commit('storeFormulario',formulario)
+  },
+
+  GetCensos({commit,state}) {
+    let ruta = state.server
+    let res = ruta.concat('api/censo/get')
+    // return new Promise((resolve,reject) => {
+    //   axios.get(res)
+    //   .then(response => {
+    //     commit('getCensos',response.data)
+    //     resolve(response)
+    //   })
+    //   .catch(e => {
+    //     console.log(e)
+    //     reject(e)
+    //   })
+    // })
+
+    commit('getCensos', censos.censos)
+  },
+
+  StoreCenso({commit,state}, censo) {
+    let ruta = state.server
+    let res = ruta.concat('api/censo/crear')
+    // return new Promise((resolve,reject) => {
+    //   axios.post(res, censo)
+    //   .then(response => {
+    //     commit('storeCenso',response.data)
+    //     resolve(response)
+    //   })
+    //   .catch(e => {
+    //     console.log(e)
+    //     reject(e)
+    //   })
+    // })
+    console.log(censo)
+    commit('storeCenso', censo)
+  },
+
+  getUsers({commit, state}) {
+    let ruta = state.server
+    let url = ruta.concat('api/usuario/get')
+    // return new Promise((resolve, reject) => {
+    //   axios.get(url).then(response => {
+    //       resolve(response)
+    //     }).catch(e => {
+    //       alert(e)
+    //       reject(e)
+    //     })
+    // })
+  },
+
+  getFams({commit, state}) {
+    let ruta = state.server
+    let url = ruta.concat('api/vivienda/get')
+    // return new Promise((resolve, reject) => {
+    //   axios.get(url).then(response => {
+    //       commit('getFams',response.data)
+    //       resolve(response)
+    //     }).catch(e => {
+    //       alert(e)
+    //       reject(e)
+    //     })
+    // })
+    commit('getFams', familias.familias)
+  },
+
+  createUser({commit, state}, user) {
+    let ruta = state.server
+    let url = ruta.concat('api/usuario/insertar')
+    // return new Promise((resolve, reject) => {
+    //   axios.post(url, user).then(response => {
+    //       resolve(response)
+    //     }).catch(e => {
+    //       alert(e)
+    //       reject(e)
+    //     })
+    // })
+  },
+
+  editUser({commit, state}, user) {
+    let ruta = state.server
+    let url = ruta.concat('api/usuario/actualizar')
+    // return new Promise((resolve, reject) => {
+    //   axios.post(url, user).then(response => {
+    //       resolve(response)
+    //     }).catch(e => {
+    //       alert(e)
+    //       reject(e)
+    //     })
+    // })
+  },
+
+  getAllFams({commit,state}) {
+    let ruta = state.server
+    let res = ruta.concat('api/vivienda/getViviendas')
+    // return new Promise((resolve,reject) => {
+    //   axios.get(res).then(response => {
+    //     commit('getAllFams',response.data)
+    //     resolve(response)
+    //   })
+    //   .catch(e => {
+    //     console.log(e)
+    //     reject(e)
+    //   })
+    // })
+
+    commit('getAllFams', familias.familias)
+  },
+
+  storeFamilia({commit,state},fam) {
+    let ruta = state.server
+    let res = ruta.concat('api/vivienda/crear')
+    // return new Promise((resolve,reject) => {
+    //   axios.post(res,fam)
+    //   .then(response => {
+    //     commit('newFam',response.data)
+    //     resolve(response)
+    //   })
+    //   .catch(e => {
+    //     console.log(e)
+    //     reject(e)
+    //   })
+    // })
+    commit('newFam',fam)
+  }
+  
+}
