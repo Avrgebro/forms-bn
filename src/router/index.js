@@ -54,6 +54,16 @@ export const constantRoutes = [
   },
 
   {
+    path:'/forms/test',
+    component: () => import('@/views/form/index'),
+  },
+
+  {
+    path:'/thankyou',
+    component: () => import('@/views/form/thankyou/index'),
+  },
+
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',

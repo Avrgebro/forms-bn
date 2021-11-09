@@ -95,8 +95,6 @@ export default {
       //console.log(JSON.stringify(this.familia))
       this.residentes = this.familia.residentes
       // `this` points to the vm instance
-      console.log(this.forms)
-      console.log(this.censo.formulariosId)
       var forms = []
       for(var i=0; i < this.forms.length; i++) {
         if(this.censo.formulariosId.includes(this.forms[i].id)){

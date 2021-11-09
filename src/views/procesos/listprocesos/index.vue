@@ -38,6 +38,9 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
+              @click="gotoform()">URL Pulicado</el-button>
+            <el-button
+              size="mini"
               @click="handleView(scope.$index, scope.row)">Participantes</el-button>
           </template>
         </el-table-column>
@@ -84,6 +87,10 @@ export default {
     handleView(index, row) {
       console.log(index, row);
       this.$router.push({name: 'participantes', params: {data: row}})
+    },
+    gotoform(){
+      let route = this.$router.resolve({path: '/forms/test'});
+      window.open(route.href, '_blank');
     }
   },
   }
